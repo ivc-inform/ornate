@@ -17,8 +17,19 @@ lazy val root = project.in(file("."))
     ),
     description := "Ornate is a tool for building multi-page HTML sites from Markdown sources.",
     //bintrayReleaseOnPublish := false,
-    licenses += ("Apache-2.0", url("https://www.apache.org/licenses/LICENSE-2.0.html"))
-)))
+    licenses += ("Apache-2.0", url("https://www.apache.org/licenses/LICENSE-2.0.html")),
+    publishTo := {
+        val corporateRepo = "http://toucan.simplesys.lan/"
+        val v = version.value
+        if (v.endsWith("-SNAPSHOT"))
+            Some("snapshots" at corporateRepo + "artifactory/libs-snapshot-local")
+        else
+            Some("releases" at corporateRepo + "artifactory/libs-release-local")
+    },
+    credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
+))
+
+)
   .settings(
       makeDoc := (Def.taskDyn {
           val v = version.value
@@ -26,10 +37,6 @@ lazy val root = project.in(file("."))
           val args = s""" com.novocode.ornate.Main "-Dversion=$v" "-Dtag=$tag" doc/ornate.conf"""
           (runMain in Compile).toTask(args)
       }).value,
-      publishArtifact := false,
-      publish := {},
-      publishLocal := {},
-      PgpKeys.publishSigned := {},
       makeSite := {
           makeDoc.value
           val target = file("doc/target/api")
