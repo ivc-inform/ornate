@@ -1,6 +1,7 @@
-@(p: com.novocode.ornate.theme.default.DefaultPageModel)(content: Html)(footer: Html = HtmlFormat.empty)
 @import com.novocode.ornate.theme.default.DefaultTheme
 @import com.novocode.ornate.theme.HtmlFeatures
+
+@(p: com.novocode.ornate.theme.default.DefaultPageModel)(content: Html)(footer: Html = new Html(""))
 
 @import com.novocode.ornate.Section
 @pageNav(section: Section, maxLevel: Int) = {
@@ -146,10 +147,10 @@
         <div class="row">
           <div class="small-12 medium-12 large-12 columns top-bar">
             <div class="top-bar-left">
-              @{p.stringHtml("footerLeft").getOrElse(HtmlFormat.empty)}
+              @{p.stringHtml("footerLeft").getOrElse(new Html(""))}
             </div>
             <div class="top-bar-right">
-              @{p.stringHtml("footerRight").getOrElse(HtmlFormat.empty)}
+              @{p.stringHtml("footerRight").getOrElse(new Html(""))}
             </div>
           </div>
         </div>
