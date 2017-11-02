@@ -331,7 +331,7 @@ class HtmlTheme(global: Global) extends Theme(global) { self =>
           val minifyInlineJS = minifyJS && !pc.features.isRequested(HtmlFeatures.MathJax) // HtmlCompressor cannot handle non-JavaScript <script> tags
           val min =
             if(minifyHTML) Util.htmlCompressorMinimize(formatted, minimizeCss = minifyCSS, minimizeJs = minifyInlineJS) else formatted+'\n'
-          file.write(min)(codec = Codec.UTF8)
+          file.write(min)()
           Some(pm)
         } catch { case ex: Exception =>
           logger.error(s"Error rendering page ${p.uri} to $file", ex)

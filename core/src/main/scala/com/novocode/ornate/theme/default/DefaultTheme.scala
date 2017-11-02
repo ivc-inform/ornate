@@ -239,7 +239,7 @@ class DefaultSiteModel(theme: DefaultTheme, pms: Vector[HtmlPageModel]) extends 
     val css1 = themeConfig("global.cssFile").map { path =>
       val f = theme.global.getFile(path)
       try {
-        val s = f.contentAsString(Codec.UTF8)
+        val s = f.contentAsString()
         if(s.nonEmpty && !s.endsWith("\n")) s + "\n" else s
       } catch { case ex: Exception =>
         theme.logger.error("Error loading CSS file \""+path+"\" (resolved to \""+f+"\")", ex)

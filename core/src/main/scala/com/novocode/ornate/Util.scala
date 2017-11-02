@@ -2,19 +2,16 @@ package com.novocode.ornate
 
 import java.io.ByteArrayOutputStream
 import java.math.BigInteger
+import java.net.{URI, URL, URLEncoder}
 import java.security.MessageDigest
+import java.util.Locale
 
-import com.google.javascript.jscomp.CompilationLevel
-import com.googlecode.htmlcompressor.compressor.{ClosureJavaScriptCompressor, Compressor, HtmlCompressor}
+import better.files._
+import com.googlecode.htmlcompressor.compressor.{Compressor, HtmlCompressor}
 import com.novocode.ornate.js.CSSO
 
 import scala.annotation.tailrec
 import scala.collection.JavaConverters._
-import java.net.{URI, URL, URLEncoder}
-import java.util.Locale
-
-import better.files._
-
 import scala.io.Codec
 
 object Util {
@@ -106,7 +103,7 @@ object Util {
 
   def readLines(source: URL): Vector[String] = {
     val in = source.openStream()
-    try in.lines(Codec.UTF8).to[Vector] finally in.close
+    try in.lines().to[Vector] finally in.close
   }
 
   def closureMinimize(source: String, name: String = "<eval>"): String = {
@@ -114,7 +111,7 @@ object Util {
     val compiler = new Compiler
     val options = new CompilerOptions
     CompilationLevel.SIMPLE_OPTIMIZATIONS.setOptionsForCompilationLevel(options)
-    val extern = AbstractCommandLineRunner.getBuiltinExterns(CompilerOptions.Environment.BROWSER)
+    val extern = CommandLineRunner.getDefaultExterns
     val input = SourceFile.fromCode(name, source)
     compiler.compile(extern, List(input).asJava, options)
     compiler.toSource

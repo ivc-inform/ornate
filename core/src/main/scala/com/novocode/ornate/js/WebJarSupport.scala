@@ -1,5 +1,6 @@
 package com.novocode.ornate.js
 
+import java.io.InputStream
 import java.util.regex.Pattern
 
 import better.files._
@@ -16,8 +17,12 @@ trait WebJarSupport {
 
   def loadAsset(webjar: String, exactPath: String): Option[String] = getFullPathExact(webjar, exactPath).map { path =>
     logger.debug(s"Loading WebJar asset: $webjar/$exactPath")
-    val in = getClass.getClassLoader.getResourceAsStream(path)
-    try in.content(Codec.UTF8).mkString finally in.close()
+    val in: InputStream = getClass.getClassLoader.getResourceAsStream(path)
+
+    try
+      in. content(Codec.UTF8).mkString
+    finally
+      in.close()
   }
 }
 
