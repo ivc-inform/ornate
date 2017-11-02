@@ -24,7 +24,7 @@ object PageParser extends Logging {
     logTime("Parsing took") {
       global.parMap(sources) { case (f, suffix, uri) =>
         logger.debug(s"Parsing $f as $uri")
-        try Some(parseWithFrontMatter(Some(f.uri), syntheticNames.get(uri), global.userConfig, uri, suffix, f.contentAsString(Codec.UTF8)))
+        try Some(parseWithFrontMatter(Some(f.uri), syntheticNames.get(uri), global.userConfig, uri, suffix, f.contentAsString()))
         catch { case ex: Exception =>
           logger.error(s"Error parsing $f -- skipping file", ex)
           None
@@ -33,8 +33,7 @@ object PageParser extends Logging {
     }
   }
 
-  def parseWithFrontMatter(sourceFileURI: Option[URI], syntheticName: Option[String],
-                           globalConfig: ReferenceConfig, uri: URI, suffix: String, text: String): Page = {
+  def parseWithFrontMatter(sourceFileURI: Option[URI], syntheticName: Option[String], globalConfig: ReferenceConfig, uri: URI, suffix: String, text: String): Page = {
     val lines = text.lines
     val (front, content) = if(lines.hasNext && lines.next.trim == "---") {
       var foundEnd = false
