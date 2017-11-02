@@ -1,33 +1,26 @@
 package com.novocode.ornate.theme
 
-import java.net.{URI, URL}
+import java.net.URI
 import java.text.Collator
 import java.util.{Collections, Comparator, Locale}
 
-import better.files.File.OpenOptions
-import com.novocode.ornate._
-import com.novocode.ornate.commonmark.NodeExtensionMethods._
-import com.novocode.ornate.commonmark.HtmlNodeRendererContextExtensionMethods._
 import better.files._
 import com.novocode.ornate.URIExtensionMethods._
+import com.novocode.ornate._
+import com.novocode.ornate.commonmark.HtmlNodeRendererContextExtensionMethods._
+import com.novocode.ornate.commonmark.NodeExtensionMethods._
 import com.novocode.ornate.commonmark._
 import com.novocode.ornate.config.ConfigExtensionMethods.configExtensionMethods
 import com.novocode.ornate.config.Global
-import com.novocode.ornate.highlight.{HighlightResult, Highlit, HighlitBlock, HighlitInline}
+import com.novocode.ornate.highlight.{HighlightResult, HighlitBlock, HighlitInline}
 import com.novocode.ornate.js.{CSSO, ElasticlunrSearch, WebJarSupport}
 import com.typesafe.config.{ConfigObject, ConfigRenderOptions, ConfigValue}
-import org.commonmark.renderer.NodeRenderer
-import org.commonmark.renderer.html.HtmlRenderer
-import org.commonmark.renderer.html.HtmlRenderer.HtmlRendererExtension
-import org.commonmark.renderer.html.{HtmlNodeRendererContext, HtmlNodeRendererFactory}
 import org.commonmark.node._
+import org.commonmark.renderer.html.{HtmlNodeRendererContext, HtmlNodeRendererFactory, HtmlRenderer}
 import play.twirl.api.{Html, HtmlFormat, Template1, TxtFormat}
 
-import scala.StringBuilder
 import scala.collection.JavaConverters._
 import scala.collection.mutable
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, Future}
 import scala.io.Codec
 
 /** Base class for Twirl-based HTML themes */
@@ -52,7 +45,7 @@ class HtmlTheme(global: Global) extends Theme(global) { self =>
   /** Render a heading with an ID. It can be overridden in subclasses as needed. */
   def renderAttributedHeading(pc: HtmlPageContext)(n: AttributedHeading, c: HtmlNodeRendererContext): Unit = {
     val htag = s"h${n.getLevel}"
-    val attrs = c.extendAttributes(n, Collections.emptyMap[String, String])
+    val attrs = c.extendAttributes(n, "", Collections.emptyMap[String, String])
     if(n.id ne null) attrs.put("id", n.id)
     val classes = n.simpleAttrs.filter(_.startsWith(".")).map(_.drop(1))
     if(classes.nonEmpty) attrs.put("class", classes.mkString(" "))
@@ -65,7 +58,7 @@ class HtmlTheme(global: Global) extends Theme(global) { self =>
   }
 
   def renderAttributedBlockQuote(n: AttributedBlockQuote, c: HtmlNodeRendererContext): Unit = {
-    val attrs = c.extendAttributes(n, Collections.emptyMap[String, String])
+    val attrs = c.extendAttributes(n, "", Collections.emptyMap[String, String])
     if(n.id ne null) attrs.put("id", n.id)
     val classes = n.simpleAttrs.filter(_.startsWith(".")).map(_.drop(1))
     if(classes.nonEmpty) attrs.put("class", classes.mkString(" "))

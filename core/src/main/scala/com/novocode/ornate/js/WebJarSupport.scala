@@ -20,7 +20,7 @@ trait WebJarSupport {
     val in: InputStream = getClass.getClassLoader.getResourceAsStream(path)
 
     try
-      in. content(Codec.UTF8).mkString
+      in.content(Codec.UTF8).mkString
     finally
       in.close()
   }

@@ -97,7 +97,7 @@ class DefaultTheme(global: Global) extends HtmlTheme(global) {
     val attrs =
       if(n.getLevel <= pc.asInstanceOf[DefaultPageContext].pageNavMaxLevel) baseAttrs + ("data-magellan-target" -> n.id)
       else baseAttrs
-    wr.tag(htag, c.extendAttributes(n, attrs.asJava))
+    wr.tag(htag, c.extendAttributes(n, "", attrs.asJava))
     c.renderChildren(n)
     wr.raw(s"""<a class="a_hlink" href="#${n.id}"></a>""")
     wr.tag('/' + htag)
@@ -174,7 +174,7 @@ class DefaultTheme(global: Global) extends HtmlTheme(global) {
     val wr = c.getWriter
     wr.line
     wr.raw("""<div class="row"><div class="small-expand columns a_xscroll a_table">""")
-    wr.tag("table", c.extendAttributes(n, Collections.emptyMap[String, String]))
+    wr.tag("table", c.extendAttributes(n, "", Collections.emptyMap[String, String]))
     c.renderChildren(n)
     wr.tag("/table")
     wr.raw("</div></div>")

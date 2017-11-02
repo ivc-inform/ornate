@@ -57,7 +57,7 @@ class PdfTheme(global: Global) extends HtmlTheme(global) {
     val htag = s"h${n.getLevel}"
     wr.line
     val attrs = Map[String, String]("id" -> n.id)
-    wr.tag(htag, c.extendAttributes(n, attrs.asJava))
+    wr.tag(htag, c.extendAttributes(n, "", attrs.asJava))
     n.children.toVector.foreach(c.render)
     wr.tag('/' + htag)
     wr.line
@@ -91,7 +91,7 @@ class PdfTheme(global: Global) extends HtmlTheme(global) {
     val wr = c.getWriter
     wr.line
     wr.raw("""<div class="a_table">""")
-    wr.tag("table", c.extendAttributes(n, Collections.emptyMap[String, String]))
+    wr.tag("table", c.extendAttributes(n,"", Collections.emptyMap[String, String]))
     n.children.toVector.foreach(c.render)
     wr.tag("/table")
     wr.raw("</div>")
