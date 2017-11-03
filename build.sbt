@@ -94,7 +94,7 @@ lazy val plugin = project.in(file("plugin"))
       buildInfoKeys := Seq[BuildInfoKey](organization, (name in core), version, (scalaVersion in core)),
       buildInfoPackage := "com.novocode.ornate.sbtplugin",
       ScriptedPlugin.projectSettings,
-      scriptedLaunchOpts ++= Seq("-Xmx1024M", "-Dplugin.version=" + version.value),
+      //scriptedLaunchOpts ++= Seq("-Xmx1024M", "-Dplugin.version=" + version.value),
       scriptedBufferLog := false,
       publishMavenStyle := true,
       scriptedDependencies := {
