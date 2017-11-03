@@ -90,7 +90,7 @@ lazy val plugin = project.in(file("plugin"))
   .settings(
       name := "sbt-ornate",
       sbtPlugin := true,
-      scalaVersion := "2.12.4",
+      scalaVersion := "2.10.6",
       buildInfoKeys := Seq[BuildInfoKey](organization, (name in core), version, (scalaVersion in core)),
       buildInfoPackage := "com.novocode.ornate.sbtplugin",
       ScriptedPlugin.projectSettings,
