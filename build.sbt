@@ -62,7 +62,7 @@ lazy val core = project.in(file("core"))
           "com.typesafe" % "config" % "1.3.2",
           "org.slf4j" % "slf4j-api" % "1.7.25",
           "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
-          "com.github.pathikrit" %% "better-files" % "2.17.0",
+          "com.github.pathikrit" %% "better-files" % "3.2.0",
           "com.typesafe.play" %% "play-json" % "2.6.6",
           "org.webjars" % "webjars-locator-core" % "0.34",
           "org.webjars.npm" % "highlight.js" % "9.12.0",
