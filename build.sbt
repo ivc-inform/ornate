@@ -8,7 +8,7 @@ lazy val root = project.in(file("."))
   .settings(inThisBuild(Seq(
     organization := "com.novocode",
     version := "0.6-SNAPSHOT",
-    scalaVersion := "2.12.4",
+    scalaVersion := "2.10.6",
     scalacOptions ++= Seq("-deprecation", "-unchecked"),
     homepage := Some(url("https://szeiger.github.io/ornate-doc/")),
     scmInfo := Some(ScmInfo(url("https://github.com/szeiger/ornate"), "git@github.com:szeiger/ornate.git")),
