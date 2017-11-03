@@ -8,7 +8,7 @@ lazy val root = project.in(file("."))
   .settings(inThisBuild(Seq(
     organization := "com.novocode",
     version := "0.6-SNAPSHOT",
-    scalaVersion := "2.10.6",
+    scalaVersion := "2.12.4",
     scalacOptions ++= Seq("-deprecation", "-unchecked"),
     homepage := Some(url("https://szeiger.github.io/ornate-doc/")),
     scmInfo := Some(ScmInfo(url("https://github.com/szeiger/ornate"), "git@github.com:szeiger/ornate.git")),
@@ -61,7 +61,7 @@ lazy val core = project.in(file("core"))
           "com.atlassian.commonmark" % "commonmark-ext-ins" % commonMarkVersion,
           "com.typesafe" % "config" % "1.3.2",
           "org.slf4j" % "slf4j-api" % "1.7.25",
-          "org.scala-lang.modules" %% "scala-xml" % "1.0.5",
+          "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
           "com.github.pathikrit" %% "better-files" % "2.17.0",
           "com.typesafe.play" %% "play-json" % "2.6.6",
           "org.webjars" % "webjars-locator-core" % "0.34",
